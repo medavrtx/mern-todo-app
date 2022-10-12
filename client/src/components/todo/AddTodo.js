@@ -1,16 +1,12 @@
+import classes from './AddTodo.module.css';
+
 function AddTodo() {
   return (
-    <div className="card card--add">
-      <form className="add-form">
+    <div className={classes.addCard}>
+      <form>
         <label htmlFor="task" />
-        <input
-          type="text"
-          className="input"
-          id="task"
-          placeholder="Add a task"
-          required
-        ></input>
-        <button className="btn">Add</button>
+        <input type="text" id="task" placeholder="Add a task" required></input>
+        <button>Add</button>
       </form>
     </div>
   );

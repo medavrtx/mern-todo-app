@@ -1,0 +1,14 @@
+.card {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  border-radius: 5px;
+  margin: 1px;
+}
+
+.card input:hover {
+  cursor: pointer;
+  opacity: 50%;
+}
