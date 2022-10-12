@@ -21,7 +21,6 @@ todoRoutes.route('/todos').get(function (req, res) {
 // Create new todo
 todoRoutes.route('/todos/add').post(function (req, response) {
   let db_connect = dbo.getDb();
-  console.log(req.body.task);
   let myobj = {
     task: req.body.task,
   };
