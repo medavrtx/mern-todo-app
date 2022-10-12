@@ -30,8 +30,3 @@
 .addCard input:focus {
   outline: none;
 }
-
-.addCard button:hover {
-  opacity: 80%;
-  cursor: pointer;
-}
