@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import AddTodo from './components/todo/AddTodo';
 import ClearButton from './components/todo/ClearButton';
 import Todo from './components/todo/Todo';
@@ -6,8 +6,26 @@ import Modal from './components/ui/Modal';
 import Backdrop from './components/ui/Backdrop';
 
 function App() {
-  const [todos, setTodos] = useState([{ id: 'td1', task: 'Task 1' }]);
+  const [todos, setTodos] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  async function getTasks() {
+    const response = await fetch(`http://localhost:5000/todos`);
+
+    if (!response.ok) {
+      const message = `An error occured: ${response.statusText}`;
+      window.alert(message);
+      return;
+    }
+
+    const todos = await response.json();
+    setTodos(todos);
+  }
+
+  useEffect(() => {
+    getTasks();
+    return;
+  }, []);
 
   function deleteHandler() {
     setModalIsOpen(true);
