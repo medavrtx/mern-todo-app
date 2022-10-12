@@ -33,7 +33,6 @@ function App() {
   function closeModalHandler() {
     setModalIsOpen(false);
   }
-  console.log(modalIsOpen);
 
   return (
     <div className="main">
