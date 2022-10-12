@@ -10,7 +10,7 @@ function App() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   async function getTasks() {
-    const response = await fetch(`http://localhost:5000/todos`);
+    const response = await fetch(`${process.env.REACT_APP_API}/todos`);
 
     if (!response.ok) {
       const message = `An error occured: ${response.statusText}`;

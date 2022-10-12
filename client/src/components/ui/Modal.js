@@ -1,6 +1,6 @@
 function Modal(props) {
   async function deleteHandler() {
-    await fetch(`http://localhost:5000/todos/delete`, {
+    await fetch(`${process.env.REACT_APP_API}/todos/delete`, {
       method: 'DELETE',
     });
     props.getTasks();

@@ -5,7 +5,7 @@ function Todo(props) {
   const checkbox = useRef();
 
   async function deleteHandler() {
-    await fetch(`http://localhost:5000/${props.id}`, {
+    await fetch(`${process.env.REACT_APP_API}/${props.id}`, {
       method: 'DELETE',
     });
     checkbox.current.checked = false;

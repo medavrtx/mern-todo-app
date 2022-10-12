@@ -15,7 +15,7 @@ function AddTodo(props) {
 
     const newTask = { ...form };
 
-    await fetch('http://localhost:5000/todos/add', {
+    await fetch(`${process.env.REACT_APP_API}/todos/add`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
