@@ -1,7 +1,7 @@
 import classes from './AddTodo.module.css';
 import { useState } from 'react';
 
-function AddTodo() {
+function AddTodo(props) {
   const [form, setForm] = useState({ task: '' });
 
   function updateForm(value) {
@@ -25,6 +25,7 @@ function AddTodo() {
       console.log(err);
       return;
     });
+    props.getTasks();
 
     setForm({ task: '' });
   }

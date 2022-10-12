@@ -50,7 +50,7 @@ function App() {
             />
           );
         })}
-        <AddTodo />
+        <AddTodo getTasks={getTasks} />
       </div>
       <ClearButton onClick={deleteHandler} />
       {modalIsOpen && (
