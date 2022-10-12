@@ -15,19 +15,22 @@ function AddTodo(props) {
 
     const newTask = { ...form };
 
-    await fetch(`${process.env.REACT_APP_API}/todos/add`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newTask),
-    }).catch((err) => {
-      console.log(err);
-      return;
-    });
-    props.getTasks();
-
-    setForm({ task: '' });
+    if (props.todos.length < 10) {
+      await fetch(`${process.env.REACT_APP_API}/todos/add`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newTask),
+      }).catch((err) => {
+        console.log(err);
+        return;
+      });
+      props.getTasks();
+      setForm({ task: '' });
+    } else {
+      window.alert('Keep list at 10 tasks and below');
+    }
   }
 
   return (
