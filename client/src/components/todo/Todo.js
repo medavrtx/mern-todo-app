@@ -3,7 +3,6 @@ import { useRef } from 'react';
 
 function Todo(props) {
   const checkbox = useRef();
-  console.log(props);
 
   async function deleteHandler() {
     await fetch(`http://localhost:5000/${props.id}`, {

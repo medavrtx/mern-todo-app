@@ -38,6 +38,7 @@ function App() {
     <div className="main">
       <h1>To-Do List</h1>
       <div className="todo-list">
+        {!todos.length && <h3>No tasks! 😊</h3>}
         {todos.map((todo, index) => {
           return (
             <Todo
@@ -53,7 +54,11 @@ function App() {
       </div>
       <ClearButton onClick={deleteHandler} />
       {modalIsOpen && (
-        <Modal onCancel={closeModalHandler} onConfirm={closeModalHandler} />
+        <Modal
+          onCancel={closeModalHandler}
+          onConfirm={closeModalHandler}
+          getTasks={getTasks}
+        />
       )}
       {modalIsOpen && <Backdrop onClick={closeModalHandler} />}
     </div>

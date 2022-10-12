@@ -42,4 +42,14 @@ todoRoutes.route('/:id').delete((req, response) => {
   });
 });
 
+// Delete all todo
+todoRoutes.route('/todos/delete').delete((req, response) => {
+  let db_connect = dbo.getDb();
+  db_connect.collection('todos').deleteMany({}, function (err, removed) {
+    if (err) throw err;
+    console.log('All task(s) deleted');
+    response.json(removed);
+  });
+});
+
 module.exports = todoRoutes;
