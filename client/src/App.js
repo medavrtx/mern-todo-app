@@ -8,18 +8,23 @@ import Backdrop from './components/ui/Backdrop';
 function App() {
   const [todos, setTodos] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   async function getTasks() {
-    const response = await fetch(`${process.env.REACT_APP_API}/todos`);
-
-    if (!response.ok) {
-      const message = `An error occured: ${response.statusText}`;
-      window.alert(message);
-      return;
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API}/todos`);
+      const todos = await response.json();
+      setTodos(todos);
+      setLoading(false);
+      setError(false);
+      return console.log("Todo's fetched!");
+    } catch (err) {
+      const message = `An error occured: ${err.message}`;
+      setLoading(false);
+      setError(true);
+      throw console.log(message);
     }
-
-    const todos = await response.json();
-    setTodos(todos);
   }
 
   useEffect(() => {
@@ -38,7 +43,16 @@ function App() {
     <div className="main">
       <h1>To-Do List</h1>
       <div className="todo-list">
-        {!todos.length && <h3>No tasks! 😊</h3>}
+        {!todos.length && loading && <h3>Loading...</h3>}
+        {!todos.length && !loading && error && (
+          <div id="error">
+            <h3>Error</h3>
+            <button className="btn btn--error" onClick={getTasks}>
+              Refresh
+            </button>
+          </div>
+        )}
+        {!todos.length && !loading && !error && <h3>No tasks! 😊</h3>}
         {todos.map((todo, index) => {
           return (
             <Todo
