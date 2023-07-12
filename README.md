@@ -17,7 +17,7 @@ A single page to-do app built with mern stack.
 
 1. Go to root directory
 2. `cd server`
-3. `node server.js`
+3. `node app.js`
 
 ## Start Client Side
 

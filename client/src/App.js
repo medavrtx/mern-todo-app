@@ -10,7 +10,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  const fetchTodoshandler = useCallback(async () => {
+  const fetchTodosHandler = useCallback(async () => {
     setIsLoading(true);
     setError(null);
     try {
@@ -27,8 +27,8 @@ function App() {
   }, []);
 
   useEffect(() => {
-    fetchTodoshandler();
-  }, [fetchTodoshandler]);
+    fetchTodosHandler();
+  }, [fetchTodosHandler]);
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -46,7 +46,7 @@ function App() {
         todos={todos}
         isLoading={isLoading}
         error={error}
-        fetchTodos={fetchTodoshandler}
+        fetchTodos={fetchTodosHandler}
         setTodos={setTodos}
       />
       <ClearButton onClick={deleteHandler} />
