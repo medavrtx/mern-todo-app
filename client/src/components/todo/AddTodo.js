@@ -1,33 +1,36 @@
 import classes from './AddTodo.module.css';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 function AddTodo(props) {
-  const [form, setForm] = useState({ task: '' });
+  const taskInputRef = useRef();
+  const [enteredTask, setEnteredTask] = useState('');
 
-  function updateForm(value) {
-    return setForm((prev) => {
-      return { ...prev, ...value };
-    });
-  }
+  const taskInputChangeHandler = (event) => {
+    setEnteredTask(event.target.value);
+  };
 
-  async function onSubmit(e) {
-    e.preventDefault();
-
-    const newTask = { ...form };
-
+  async function addTodoHandler(event) {
+    event.preventDefault();
     if (props.todos.length < 10) {
-      await fetch(`${process.env.REACT_APP_API}/todos/add`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newTask),
-      }).catch((err) => {
-        console.log(err);
-        return;
-      });
+      const newTask = { task: enteredTask };
+      try {
+        const response = await fetch(`${process.env.REACT_APP_API}/todos/add`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newTask),
+        });
+        if (!response.ok) {
+          throw new Error('Something went wrong');
+        }
+        await response.json();
+      } catch (error) {
+        throw new Error(error);
+      }
+      setEnteredTask('');
       props.getTasks();
-      setForm({ task: '' });
+      props.setTodos((currentTodos) => [...currentTodos, newTask]);
     } else {
       window.alert('Keep list at 10 tasks and below');
     }
@@ -35,14 +38,15 @@ function AddTodo(props) {
 
   return (
     <div className={classes.addCard}>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={addTodoHandler}>
         <label htmlFor="task" />
         <input
+          ref={taskInputRef}
           type="text"
           id="task"
           placeholder="Add a task"
-          value={form.task}
-          onChange={(e) => updateForm({ task: e.target.value })}
+          value={enteredTask}
+          onChange={taskInputChangeHandler}
           required
         ></input>
         <button>Add</button>

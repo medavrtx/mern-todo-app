@@ -16,7 +16,7 @@ exports.postAddTodo = (req, res, next) => {
   const todo = new Todo(task);
   todo.save();
   res.status(201).json({
-    message: 'To Do Added successfully!',
+    message: 'To Do Added Successfully!',
     todo: todo,
   });
 };
@@ -24,8 +24,14 @@ exports.postAddTodo = (req, res, next) => {
 exports.postDeleteTodo = (req, res, next) => {
   const { id } = req.params;
   Todo.deleteById(id);
+  res.status(200).json({
+    message: 'To Do Deleted Successfully!',
+  });
 };
 
 exports.postDeleteAll = (req, res, next) => {
   Todo.deleteAll();
+  res.status(200).json({
+    message: 'All To Dos Deleted Successfully!',
+  });
 };

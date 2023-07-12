@@ -49,7 +49,7 @@ class Todo {
     db.collection('todos')
       .deleteMany()
       .then((result) => {
-        console.log('All Tasks Deleted!');
+        console.log('All Todos Deleted!');
       })
       .catch((err) => {
         console.log(err);
