@@ -12,7 +12,7 @@ function AddTodo(props) {
   async function addTodoHandler(event) {
     event.preventDefault();
     if (props.todos.length < 10) {
-      const newTask = { task: enteredTask };
+      const newTask = { task: taskInputRef.current.value };
       try {
         const response = await fetch(`${process.env.REACT_APP_API}/todos/add`, {
           method: 'POST',
@@ -41,10 +41,10 @@ function AddTodo(props) {
       <form onSubmit={addTodoHandler}>
         <label htmlFor="task" />
         <input
-          ref={taskInputRef}
           type="text"
           id="task"
           placeholder="Add a task"
+          ref={taskInputRef}
           value={enteredTask}
           onChange={taskInputChangeHandler}
           required

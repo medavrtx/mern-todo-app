@@ -24,6 +24,7 @@ function TodoItem(props) {
   return (
     <div className={classes.card}>
       <input
+        id={props.id}
         className="check"
         type="checkbox"
         ref={checkbox}
